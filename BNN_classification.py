@@ -27,7 +27,7 @@ def placeholders(n_x,n_y):
     Y = tf.placeholder(tf.float32,shape=[n_y,None],name='Y')
     return (X,Y)
 
-def forward_propagation(X,layers_dims,param_normal, keep_prob=1.0):
+def forward_propagation(X,layers_dims,param_normal):
     
     def sample_epsilons(param_normal):
         epsilons_W = []
@@ -62,7 +62,7 @@ def forward_propagation(X,layers_dims,param_normal, keep_prob=1.0):
         if (l == len(layers_dims) - 2):
             return store["Z"+str(l+1)],samples_W,samples_b
         store["A"+str(l+1)] = tf.nn.sigmoid(store["Z"+str(l+1)])
-        store["A"+str(l+1)] = tf.nn.dropout(store["A"+str(l+1)], keep_prob)
+        store["A"+str(l+1)] = tf.nn.dropout(store["A"+str(l+1)])
 
 def initialization(layers_dims):
     param_normal = {}

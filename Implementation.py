@@ -4,8 +4,8 @@
 # In[1]:
 
 
-get_ipython().run_line_magic('run', './Package_NN.ipynb')
-get_ipython().run_line_magic('run', './Package_Uncertainty.ipynb')
+get_ipython().run_line_magic('run', './BNN.ipynb')
+get_ipython().run_line_magic('run', './Uncertainty.ipynb')
 
 
 # In[2]:

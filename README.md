@@ -1,1 +1,1 @@
-# A highly accurate Bayesian neural network-based classification method for cancer
+# EpICC: A Bayesian Neural Network with uncertainty correction for 1 accurate classification of cancer

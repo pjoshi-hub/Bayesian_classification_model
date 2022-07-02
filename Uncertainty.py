@@ -1,4 +1,3 @@
-
 # coding: utf-8
 
 # In[2]:
@@ -90,37 +89,37 @@ def detailed_plot_new(dict_result_train,uncertainty_type,y_test,arr_pred_test,al
         
       
         
-        uncorrect = []
+        incorrect = []
         for j in range(len(l_index_final)):
             if (l_index_final[j] in index_temp_incorr) ==True:
-                uncorrect.append(j)
+                incorrect.append(j)
         
         
         correct_train = []
-        uncorrect_train = []
+        incorrect_train = []
         for k in range(len(list(pred_train))):
             if (pred_train[k] != train[k]):
-                uncorrect_train.append(k)
+                incorrect_train.append(k)
             else:
                 correct_train.append(k)
 
         if uncertainty_type == 'Aleatoric':
 
             corr = np.mean(corr_al)
-            uncorr = np.mean(incorr_al)
+            incorr = np.mean(incorr_al)
             corr_train = np.mean(al_train_temp[correct_train])
             dict_mean_train[i] = corr_train
             dict_mean_test_corr[i] = corr
-            dict_mean_test_incorr[i] = uncorr
+            dict_mean_test_incorr[i] = incorr
             
         if uncertainty_type == 'Epistemic':
             
             corr = np.mean(corr_al)*scal_fac
-            uncorr = np.mean(incorr_al)*scal_fac
+            incorr = np.mean(incorr_al)*scal_fac
             corr_train = np.mean(ep_train_temp[correct_train])*scal_fac
             dict_mean_train[i] = corr_train
             dict_mean_test_corr[i] = corr
-            dict_mean_test_incorr[i] = uncorr
+            dict_mean_test_incorr[i] = incorr
             
        
     return dict_mean_train,dict_mean_test_corr,dict_mean_test_incorr
@@ -152,31 +151,31 @@ def uncertainty_calculation(logits,y_test,arr_pred_test,type_uncer,t,t_l,image_n
         epistemic_uncertainty = np.mean(np.square((np.array(epi_list)-np.mean(np.array(epi_list),axis=0))),axis=0)
         aleoteric_uncertainty = np.mean(np.array(aleo_list),axis=0)
         
-        uncorrect = []
+        incorrect = []
         for i in range(len(list(arr_pred_test))):
             if (arr_pred_test[i] != np.array(y_test)[i]):
-                uncorrect.append(i)
+                incorrect.append(i)
                 
         list_aleoteric_correct = []
         list_aleoteric_incorrect = []
         for i in range(len(aleoteric_uncertainty)):
-            if (i in uncorrect) == True:
+            if (i in incorrect) == True:
                 list_aleoteric_incorrect.append(aleoteric_uncertainty[i])
-            if (i in uncorrect) == False:
+            if (i in incorrect) == False:
                 list_aleoteric_correct.append(aleoteric_uncertainty[i])
                 
         list_epistemic_correct = []
         list_epistemic_incorrect = []
         for i in range(len(epistemic_uncertainty)):
-            if (i in uncorrect) == True:
+            if (i in incorrect) == True:
                 list_epistemic_incorrect.append(epistemic_uncertainty[i])
-            if (i in uncorrect) == False:
+            if (i in incorrect) == False:
                 list_epistemic_correct.append(epistemic_uncertainty[i])
                 
         corr = np.mean(np.array(list_aleoteric_correct))
-        uncorr = np.mean(np.array(list_aleoteric_incorrect))
+        incorr = np.mean(np.array(list_aleoteric_incorrect))
         corr_epistemic = np.mean(np.array(list_epistemic_correct))
-        uncorr_epistemic = np.mean(np.array(list_epistemic_incorrect))
+        incorr_epistemic = np.mean(np.array(list_epistemic_incorrect))
         
         if type_uncer == 'Aleatoric':
             fig = plt.figure()
@@ -192,18 +191,18 @@ def uncertainty_calculation(logits,y_test,arr_pred_test,type_uncer,t,t_l,image_n
    
             if t == 'Train':
                 plt.axvline(x=corr,c= 'b',linestyle='--',label = 'Mean uncertainty (correct)')
-                plt.axvline(x=uncorr, c = 'r',linestyle='--',label = 'Mean uncertainty (incorrect)')
+                plt.axvline(x=incorr, c = 'r',linestyle='--',label = 'Mean uncertainty (incorrect)')
                 
            
             
             if t == 'Validation':
                 plt.axhline(y=corr,c= 'g',label='Mean uncertainty for correct predictions')
-                plt.axhline(y=uncorr, c = 'm',label='Mean uncertainty for incorrect predictions')
+                plt.axhline(y=incorr, c = 'm',label='Mean uncertainty for incorrect predictions')
                 plt.legend(bbox_to_anchor=(1,1),prop={'size':10})
    
             if t== 'Test':
                 plt.axvline(x=corr, c = 'b',linestyle='--',label= 'Mean test uncertainty (correct)')
-                plt.axvline(x=uncorr,c= 'r',linestyle='--',label = 'Mean test uncertaity (incorrect)')
+                plt.axvline(x=incorr,c= 'r',linestyle='--',label = 'Mean test uncertaity (incorrect)')
                 plt.axvline(x=t_l, c = 'g',linestyle='--',label = 'Mean train uncertainty (correct)')
                 
             plt.legend(bbox_to_anchor=(1.6,1))    
@@ -215,7 +214,7 @@ def uncertainty_calculation(logits,y_test,arr_pred_test,type_uncer,t,t_l,image_n
             ax1.set_xlabel('Aleatoric Uncertainty',fontsize = 15)
            
             plt.show()
-            return [aleoteric_uncertainty,corr,uncorr]
+            return [aleoteric_uncertainty,corr,incorr]
 
         if type_uncer == 'Epistemic':
             fig = plt.figure()
@@ -231,12 +230,12 @@ def uncertainty_calculation(logits,y_test,arr_pred_test,type_uncer,t,t_l,image_n
    
             if t == 'Train':
                 plt.axvline(x=corr_epistemic/scal_fac, c = 'b',linestyle='--',label = 'Mean uncertainty (correct)')
-                plt.axvline(x=uncorr_epistemic/scal_fac,c= 'r',linestyle='--',label = 'Mean uncertainty (incorrect)')
+                plt.axvline(x=incorr_epistemic/scal_fac,c= 'r',linestyle='--',label = 'Mean uncertainty (incorrect)')
                 
    
             if t== 'Test':
                 plt.axvline(x=corr_epistemic/scal_fac, c = 'b',linestyle='--',label = 'Mean test uncertainty (correct)')
-                plt.axvline(x=uncorr_epistemic/scal_fac,c= 'r',linestyle='--',label = 'Mean test uncertainty (incorrect)')
+                plt.axvline(x=incorr_epistemic/scal_fac,c= 'r',linestyle='--',label = 'Mean test uncertainty (incorrect)')
                 plt.axvline(x=t_l*scal_fac, c = 'g',linestyle='--',label='Mean train uncertainty (correct)')
                 
                 
@@ -249,7 +248,7 @@ def uncertainty_calculation(logits,y_test,arr_pred_test,type_uncer,t,t_l,image_n
             
             fig.savefig('Desktop/paper_revision/'+str(image_name)+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
             plt.show()
-            return [epistemic_uncertainty,corr_epistemic,uncorr_epistemic]
+            return [epistemic_uncertainty,corr_epistemic,incorr_epistemic]
 
 
 # In[5]:
@@ -413,4 +412,3 @@ def uncertainty_analysis(logits_train,y_train,arr_pred_train,logits,y_test,arr_p
     plt.show()
     
     return dict_mean_ep,dict_mean_test_corr,dict_mean_test_incorr,res,list_final_test,list_final_pred,arr_pred_test_new
-

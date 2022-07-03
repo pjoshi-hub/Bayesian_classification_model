@@ -26,7 +26,7 @@ sns.set_style('whitegrid')
 # In[4]:
 
 
-df_analysis = pd.read_csv('Desktop/Study_Material/paper_figures/Manuscript/Figures_and_tables/Supplementary/Tables/2.csv')
+df_analysis = pd.read_csv('2.csv')
 
 
 # In[5]:
@@ -45,7 +45,7 @@ cancer_types = ['LAML','ACC','BLCA','LGG','BRCA','CESC','CHOL','COAD','UCEC','ES
 # In[ ]:
 
 
-df_pca2 = pd.read_csv('D:/New folder/100_genes_pca2_new.csv')
+df_pca2 = pd.read_csv('100_genes_pca2_new.csv')
 (X_train, X_test, y_train, y_test) = split_train_test(df_pca2,r)
 Ytrain = np.array(y_train).reshape(len(y_train),)
 X_train = np.array(X_train.T.reset_index(drop=True))
@@ -163,7 +163,7 @@ cancer_types = ['Oligodendroglioma','Astrocytoma','Oligoastrocytoma']
 # In[13]:
 
 
-df_pca2 = pd.read_csv('D:/New folder/brain lower grade glioma',sep='\t')
+df_pca2 = pd.read_csv('brain lower grade glioma',sep='\t')
 df_samples = pd.DataFrame(list(df_pca2.columns)[1:])
 df_samples.columns = ['sampleID']
 df_pca2_new = df_pca2.iloc[:,1:].T.reset_index(drop=True)
@@ -171,14 +171,14 @@ genes = list(df_pca2['sample'])
 df_pca2_new.columns = genes
 df_pca2 = df_pca2_new
 filelist = []
-for file in glob.glob('D:/New folder/Phenotypic_data1/*'):
+for file in glob.glob('Phenotypic_data1/*'):
     filelist.append(file)
     
 for i in range(len(filelist)):
     if filelist[i][31:] =='brain lower grade glioma':
         print(i)
         break
-df_temp = pd.read_csv('D:/New folder/Phenotypic_data1/'+str(filelist[3][31:]),sep='\t')
+df_temp = pd.read_csv('Phenotypic_data1/'+str(filelist[3][31:]),sep='\t')
 df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_oligodendroglioma = df_sample_type[df_sample_type['histological_type'] == 'Oligodendroglioma']
@@ -333,7 +333,7 @@ ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
 ax1.grid()
-fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -349,7 +349,7 @@ cancer_types = ['Infiltrating Ductal Carcinoma','Infiltrating Lobular Carcinoma'
 # In[47]:
 
 
-df_pca2 = pd.read_csv('D:/New folder/breast invasive carcinoma',sep='\t')
+df_pca2 = pd.read_csv('breast invasive carcinoma',sep='\t')
 df_samples = pd.DataFrame(list(df_pca2.columns)[1:])
 df_samples.columns = ['sampleID']
 df_pca2_new = df_pca2.iloc[:,1:].T.reset_index(drop=True)
@@ -357,7 +357,7 @@ genes = list(df_pca2['sample'])
 df_pca2_new.columns = genes
 df_pca2 = df_pca2_new
 filelist = []
-for file in glob.glob('D:/New folder/Phenotypic_data1/*'):
+for file in glob.glob('Phenotypic_data1/*'):
     filelist.append(file)
 c = 0    
 for i in range(len(filelist)):
@@ -365,7 +365,7 @@ for i in range(len(filelist)):
         print(i)
         c=i
         break
-df_temp = pd.read_csv('D:/New folder/Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
+df_temp = pd.read_csv('Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
 df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_ductal = df_sample_type[df_sample_type['histological_type'] == 'Infiltrating Ductal Carcinoma']
@@ -526,7 +526,7 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-fig.savefig('Desktop/paper_revision/'+str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -548,7 +548,7 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-fig.savefig('Desktop/paper_revision/'+str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -567,7 +567,6 @@ for j in l_temp:
             list_final_test.append(np.array(y_test)[i])
             list_final_pred.append(arr_pred_test[i])
     acc_2.append(accuracy_score(list_final_test,list_final_pred))
-    #acc_2.append(np.mean(precision_recall_fscore_support(list_final_test,list_final_pred)[1]))
     sam_2.append(len(list_final_test)*100/len(y_test))
 fig = plt.figure()
 ax1 = fig.add_axes([0, 0, 1, 1])
@@ -586,7 +585,7 @@ ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
 ax1.grid()
-fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -602,7 +601,7 @@ cancer_types =['Endometroid endometrial carcinoma','Serous endometrial carcinoma
 # In[55]:
 
 
-df_pca2 = pd.read_csv('D:/New folder/corpus endometrioid carcinoma',sep='\t')
+df_pca2 = pd.read_csv('corpus endometrioid carcinoma',sep='\t')
 df_samples = pd.DataFrame(list(df_pca2.columns)[1:])
 df_samples.columns = ['sampleID']
 df_pca2_new = df_pca2.iloc[:,1:].T.reset_index(drop=True)
@@ -610,7 +609,7 @@ genes = list(df_pca2['sample'])
 df_pca2_new.columns = genes
 df_pca2 = df_pca2_new
 filelist = []
-for file in glob.glob('D:/New folder/Phenotypic_data1/*'):
+for file in glob.glob('Phenotypic_data1/*'):
     filelist.append(file)
 c = 0    
 for i in range(len(filelist)):
@@ -618,7 +617,7 @@ for i in range(len(filelist)):
         print(i)
         c=i
         break
-df_temp = pd.read_csv('D:/New folder/Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
+df_temp = pd.read_csv('Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
 df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_endometroid = df_sample_type[df_sample_type['histological_type'] == 'Endometrioid endometrial adenocarcinoma']
@@ -764,7 +763,7 @@ ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
 ax1.grid()
-fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -780,7 +779,7 @@ cancer_types =['Squamous Cell Carcinoma','Adenocarcinoma']
 # In[62]:
 
 
-df_pca2 = pd.read_csv('D:/New folder/esophageal carcinoma',sep='\t')
+df_pca2 = pd.read_csv('esophageal carcinoma',sep='\t')
 df_samples = pd.DataFrame(list(df_pca2.columns)[1:])
 df_samples.columns = ['sampleID']
 df_pca2_new = df_pca2.iloc[:,1:].T.reset_index(drop=True)
@@ -788,7 +787,7 @@ genes = list(df_pca2['sample'])
 df_pca2_new.columns = genes
 df_pca2 = df_pca2_new
 filelist = []
-for file in glob.glob('D:/New folder/Phenotypic_data1/*'):
+for file in glob.glob('Phenotypic_data1/*'):
     filelist.append(file)
 c = 0    
 for i in range(len(filelist)):
@@ -796,7 +795,7 @@ for i in range(len(filelist)):
         print(i)
         c=i
         break
-df_temp = pd.read_csv('D:/New folder/Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
+df_temp = pd.read_csv('Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
 df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_squamous = df_sample_type[df_sample_type['histological_type'] == 'Esophagus Squamous Cell Carcinoma']
@@ -867,7 +866,7 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-fig.savefig('Desktop/paper_revision/'+str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig('str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -895,7 +894,7 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-fig.savefig('Desktop/paper_revision/'+str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -911,7 +910,7 @@ cancer_types =['Papillary Carcinoma-Classical','Papillary Carcinoma-Follicular']
 # In[96]:
 
 
-df_pca2 = pd.read_csv('D:/New folder/thyroid carcinoma',sep='\t')
+df_pca2 = pd.read_csv('thyroid carcinoma',sep='\t')
 df_samples = pd.DataFrame(list(df_pca2.columns)[1:])
 df_samples.columns = ['sampleID']
 df_pca2_new = df_pca2.iloc[:,1:].T.reset_index(drop=True)
@@ -919,7 +918,7 @@ genes = list(df_pca2['sample'])
 df_pca2_new.columns = genes
 df_pca2 = df_pca2_new
 filelist = []
-for file in glob.glob('D:/New folder/Phenotypic_data1/*'):
+for file in glob.glob('Phenotypic_data1/*'):
     filelist.append(file)
 c = 0    
 for i in range(len(filelist)):
@@ -927,7 +926,7 @@ for i in range(len(filelist)):
         print(i)
         c=i
         break
-df_temp = pd.read_csv('D:/New folder/Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
+df_temp = pd.read_csv('Phenotypic_data1/'+str(filelist[c][31:]),sep='\t')
 df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_papillary = df_sample_type[df_sample_type['histological_type'] == 'Thyroid Papillary Carcinoma - Classical/usual']
@@ -1038,7 +1037,7 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1.45, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-fig.savefig('Desktop/paper_revision/'+str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -1066,7 +1065,7 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-fig.savefig('Desktop/paper_revision/'+str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -1105,7 +1104,7 @@ ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
 ax1.grid()
-fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig(str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -1117,7 +1116,7 @@ plt.ylim(0.0,1.0)
 plt.bar([1,2,3,4,5,6],[0.6061946902654868,0.4485981308411215,0.7077625570776256,0.6216216216216216,0.7,0.6571428571428571],width =0.2,color='black')
 plt.xticks([1,2,3,4,5,6],['All cancer types', 'LGG subtypes','BRCA subtypes', 'COEN subtypes','ESCA subtypes','THCA sutypes'],rotation=30,fontsize=12)
 plt.ylabel('% samples retained',fontsize=20)
-fig.savefig('Desktop/paper_revision/num_samples_retained.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig('num_samples_retained.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 
 
 # # External Validation
@@ -1129,14 +1128,14 @@ analysis_type='external_validation'
 cancer_types = ['LAML','ACC','BLCA','LGG','BRCA','CESC','CHOL','COAD','UCEC','ESCA','GBM','HNSC','KIRC','KIRP','LIHC','LUAD','LUSC','DLBC','MESO','OV','PAAD','PCPG','PRAD','READ','SKCM','STAD','TGCT','THYM','THCA','UCS','UVM']
 np.random.seed(0)
 r = np.random.randint(500)
-df_pca2 = pd.read_csv('D:/New folder/100_genes_pca2_new.csv')
+df_pca2 = pd.read_csv('100_genes_pca2_new.csv')
 (X_train, X_test, y_train, y_test) = split_train_test(df_pca2,r)
 
 
 # In[21]:
 
 
-df_test = pd.read_csv('Desktop/combined_external.csv')
+df_test = pd.read_csv('combined_external.csv')
 
 
 # In[22]:
@@ -1178,5 +1177,5 @@ plt.ylim(80,100)
 plt.bar([1,2,3],[90,100,100],width =0.2,color='lightblue')
 plt.xticks([1,2,3],['BNN','BNN+Filter','BNN+EpICC'],fontsize=12)
 plt.ylabel('Accuracy (%)',fontsize=20)
-fig.savefig('Desktop/paper_revision/external_validation.pdf', format='pdf', dpi=1200,bbox_inches='tight')
+fig.savefig('external_validation.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 

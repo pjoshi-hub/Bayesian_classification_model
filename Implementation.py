@@ -21,7 +21,6 @@ r = np.random.randint(500)
 import statsmodels.api as sm
 from sklearn.metrics import precision_recall_fscore_support
 sns.set_style('whitegrid')
-#from sklearn.metrics import balanced_accuracy_score
 
 
 # In[4]:
@@ -64,13 +63,6 @@ layers_dims = [X_train.shape[0],250,95,31]
 dict_mean_ep,dict_mean_test_corr,dict_mean_test_incorr,res,list_final_test,list_final_pred,arr_pred_test_new = uncertainty_analysis(logits_train,y_train,arr_pred_train,logits,y_test,arr_pred_test,1e-9,analysis_type)
 
 
-# diff_list = []
-# sample_list = []
-# for i in range(31):
-#     if (np.isnan(dict_mean_test_corr[i]) == False) and (np.isnan(dict_mean_test_incorr[i]) == False):
-#         diff_list.append((dict_mean_test_incorr[i]-dict_mean_test_corr[i])/dict_mean_test_corr[i])
-#         sample_list.append(int(sample_numbers[i]))
-
 # In[28]:
 
 
@@ -94,11 +86,9 @@ plt.bar(np.arange(0,len(fscore_filter)),fscore_filter-fscore,bottom = fscore,lab
 plt.ylabel('F1 Score',fontsize=25)
 plt.xlabel('Cancer types',fontsize=25)
 plt.xticks(np.arange(0,len(fscore)),cancer_types,fontsize=12.5)
-#plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-#fig.savefig('Desktop/paper_revision/'+str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -120,7 +110,6 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-#fig.savefig('Desktop/paper_revision/'+str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -139,34 +128,24 @@ for j in l_temp:
             list_final_test.append(np.array(y_test)[i])
             list_final_pred.append(arr_pred_test[i])
     acc_2.append(accuracy_score(list_final_test,list_final_pred))
-    #acc_2.append(np.mean(precision_recall_fscore_support(list_final_test,list_final_pred)[1]))
     sam_2.append(len(list_final_test)*100/2034)
 fig = plt.figure()
 ax1 = fig.add_axes([0, 0, 1, 1])
 ax2 = fig.add_axes()
 ax2 = ax1.twinx()
 l1 = ax1.plot(l_temp,np.array(acc_2),c='r',linestyle='-',label='Overall Accuracy')
-#l2 = ax1.plot(l_temp,np.array(acc_1)*100,c='r',label='Overall Accuracy method 1')
 ax1.tick_params(axis='y', labelcolor='r')
 l2 = ax2.plot(l_temp,sam_2,c='b',linestyle = '-',label = 'No. of samples' )
-#l4 = ax2.plot(l_temp,sam_1,c='g',label='No. of samples method 1')
 ax2.tick_params(axis='y', labelcolor='b')
 leg = l2+l1
 ax1.set_ylabel('Overall Accuracy (%)', color='r',fontsize=15)
 ax2.set_ylabel('% samples retained', color='b',fontsize=15)
 ax1.set_xlabel('Filtering cut-off (Times train uncertainty)',fontsize=15)
 labs = [l.get_label() for l in leg]
-#ax1.legend()
 ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
-#ax1.legend(bbox_to_anchor=(1,0.65))
-#ax2.legend(bbox_to_anchor=(0.99,0.80))
-#ax2.grid(None)
-#ax2.set_yticks(np.linspace(ax2.get_yticks()[0],ax2.get_yticks()[-1],len(ax1.get_yticks())))
 ax1.grid()
-#fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
-#fig.savefig('Desktop/paper_figures/'+str('times_train_uncertainty_plot')+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -208,14 +187,12 @@ df_sample_type_oligoastrocytoma = df_sample_type[df_sample_type['histological_ty
 df_sample_type_oligodendroglioma['histological_type'] = 0
 df_sample_type_astrocytoma['histological_type'] = 1
 df_sample_type_oligoastrocytoma['histological_type'] = 2
-#df_phenotype_prediction = pd.concat([df_sample_type_oligodendroglioma,df_sample_type_astrocytoma])
 df_phenotype_prediction = pd.concat([df_sample_type_oligodendroglioma,df_sample_type_astrocytoma,df_sample_type_oligoastrocytoma])
 df_sample_type_merged = df_samples.merge(df_phenotype_prediction,on='sampleID',how='inner')
 df_pca2_with_samples = df_samples.merge(df_pca2,right_index=True,left_index=True)
 df_pca2_common = df_sample_type_merged.merge(df_pca2_with_samples,on='sampleID',how='inner')
 df_pca2_common.dropna(inplace=True)
 df_pca2_common.drop('sampleID',axis=1,inplace=True)
-#df_pca2_common.drop('label',axis=1,inplace=True)
 df_pca2_common['label'] = list(df_pca2_common['histological_type'])
 df_pca2_common.drop('histological_type',axis=1,inplace=True)
 
@@ -280,7 +257,6 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1.45, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-#fig.savefig('Desktop/paper_revision/'+str('baseline_filter_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -308,7 +284,6 @@ plt.ylim((0.01,1.05))
 plt.legend(bbox_to_anchor=(1, 1.02),prop={'size':15})
 ax = plt.axes()
 ax.yaxis.grid(True,which='major')
-#fig.savefig('Desktop/paper_revision/'+str('method_comparison_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -340,34 +315,25 @@ for j in l_temp:
             list_final_test.append(np.array(y_test)[i])
             list_final_pred.append(arr_pred_test[i])
     acc_2.append(accuracy_score(list_final_test,list_final_pred))
-    #acc_2.append(np.mean(precision_recall_fscore_support(list_final_test,list_final_pred)[1]))
     sam_2.append(len(list_final_test)*100/len(y_test))
 fig = plt.figure()
 ax1 = fig.add_axes([0, 0, 1, 1])
 ax2 = fig.add_axes()
 ax2 = ax1.twinx()
 l1 = ax1.plot(l_temp,np.array(acc_2),c='r',linestyle='-',label='Overall Accuracy')
-#l2 = ax1.plot(l_temp,np.array(acc_1)*100,c='r',label='Overall Accuracy method 1')
 ax1.tick_params(axis='y', labelcolor='r')
 l2 = ax2.plot(l_temp,sam_2,c='b',linestyle = '-',label = 'No. of samples' )
-#l4 = ax2.plot(l_temp,sam_1,c='g',label='No. of samples method 1')
 ax2.tick_params(axis='y', labelcolor='b')
 leg = l2+l1
 ax1.set_ylabel('Overall Accuracy (%)', color='r',fontsize=15)
 ax2.set_ylabel('% samples retained', color='b',fontsize=15)
 ax1.set_xlabel('Filtering cut-off (Times train uncertainty)',fontsize=15)
 labs = [l.get_label() for l in leg]
-#ax1.legend()
 ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
-#ax1.legend(bbox_to_anchor=(1,0.65))
-#ax2.legend(bbox_to_anchor=(0.99,0.80))
-#ax2.grid(None)
-#ax2.set_yticks(np.linspace(ax2.get_yticks()[0],ax2.get_yticks()[-1],len(ax1.get_yticks())))
 ax1.grid()
 fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
-#fig.savefig('Desktop/paper_figures/'+str('times_train_uncertainty_plot')+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -404,17 +370,14 @@ df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_ductal = df_sample_type[df_sample_type['histological_type'] == 'Infiltrating Ductal Carcinoma']
 df_sample_type_lobular = df_sample_type[df_sample_type['histological_type'] == 'Infiltrating Lobular Carcinoma']
-#df_sample_type_oligoastrocytoma = df_sample_type[df_sample_type['histological_type'] == 'Oligoastrocytoma']
 df_sample_type_ductal['histological_type'] = 0
 df_sample_type_lobular['histological_type'] = 1
-#df_sample_type_oligoastrocytoma['histological_type'] = 2
 df_phenotype_prediction = pd.concat([df_sample_type_ductal,df_sample_type_lobular])
 df_sample_type_merged = df_samples.merge(df_phenotype_prediction,on='sampleID',how='inner')
 df_pca2_with_samples = df_samples.merge(df_pca2,right_index=True,left_index=True)
 df_pca2_common = df_sample_type_merged.merge(df_pca2_with_samples,on='sampleID',how='inner')
 df_pca2_common.dropna(inplace=True)
 df_pca2_common.drop('sampleID',axis=1,inplace=True)
-#df_pca2_common.drop('label',axis=1,inplace=True)
 df_pca2_common['label'] = list(df_pca2_common['histological_type'])
 df_pca2_common.drop('histological_type',axis=1,inplace=True)
 
@@ -575,7 +538,6 @@ fig = plt.figure()
 fscore = precision_recall_fscore_support(np.array(y_test),np.array(arr_pred_test))[2]
 fscore_filter = precision_recall_fscore_support(np.array(list_final_test),np.array(list_final_pred))[2]
 fscore_corrected = precision_recall_fscore_support(np.array(y_test),np.array(arr_pred_test_new))[2]
-#fig = plt.figure(figsize=(20,5))
 plt.bar(np.arange(0,len(fscore))-0.1,fscore,label = 'BNN',color='r',width=0.05)
 plt.bar(np.arange(0,len(fscore_filter)),fscore_filter,width=0.05,label = 'BNN+Filter')
 plt.bar(np.arange(0,len(fscore_corrected))+0.1,np.array(fscore_corrected),label='BNN+EpICC',color='g',width=0.05)
@@ -612,27 +574,19 @@ ax1 = fig.add_axes([0, 0, 1, 1])
 ax2 = fig.add_axes()
 ax2 = ax1.twinx()
 l1 = ax1.plot(l_temp,np.array(acc_2),c='r',linestyle='-',label='Overall Accuracy')
-#l2 = ax1.plot(l_temp,np.array(acc_1)*100,c='r',label='Overall Accuracy method 1')
 ax1.tick_params(axis='y', labelcolor='r')
 l2 = ax2.plot(l_temp,sam_2,c='b',linestyle = '-',label = 'No. of samples' )
-#l4 = ax2.plot(l_temp,sam_1,c='g',label='No. of samples method 1')
 ax2.tick_params(axis='y', labelcolor='b')
 leg = l2+l1
 ax1.set_ylabel('Overall Accuracy (%)', color='r',fontsize=15)
 ax2.set_ylabel('% samples retained', color='b',fontsize=15)
 ax1.set_xlabel('Filtering cut-off (Times train uncertainty)',fontsize=15)
 labs = [l.get_label() for l in leg]
-#ax1.legend()
 ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
-#ax1.legend(bbox_to_anchor=(1,0.65))
-#ax2.legend(bbox_to_anchor=(0.99,0.80))
-#ax2.grid(None)
-#ax2.set_yticks(np.linspace(ax2.get_yticks()[0],ax2.get_yticks()[-1],len(ax1.get_yticks())))
 ax1.grid()
 fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
-#fig.savefig('Desktop/paper_figures/'+str('times_train_uncertainty_plot')+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -669,17 +623,14 @@ df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_endometroid = df_sample_type[df_sample_type['histological_type'] == 'Endometrioid endometrial adenocarcinoma']
 df_sample_type_serous = df_sample_type[df_sample_type['histological_type'] == 'Serous endometrial adenocarcinoma']
-#df_sample_type_oligoastrocytoma = df_sample_type[df_sample_type['histological_type'] == 'Oligoastrocytoma']
 df_sample_type_endometroid['histological_type'] = 0
 df_sample_type_serous['histological_type'] = 1
-#df_sample_type_oligoastrocytoma['histological_type'] = 2
 df_phenotype_prediction = pd.concat([df_sample_type_endometroid,df_sample_type_serous])
 df_sample_type_merged = df_samples.merge(df_phenotype_prediction,on='sampleID',how='inner')
 df_pca2_with_samples = df_samples.merge(df_pca2,right_index=True,left_index=True)
 df_pca2_common = df_sample_type_merged.merge(df_pca2_with_samples,on='sampleID',how='inner')
 df_pca2_common.dropna(inplace=True)
 df_pca2_common.drop('sampleID',axis=1,inplace=True)
-#df_pca2_common.drop('label',axis=1,inplace=True)
 df_pca2_common['label'] = list(df_pca2_common['histological_type'])
 df_pca2_common.drop('histological_type',axis=1,inplace=True)
 
@@ -795,34 +746,25 @@ for j in l_temp:
             list_final_test.append(np.array(y_test)[i])
             list_final_pred.append(arr_pred_test[i])
     acc_2.append(accuracy_score(list_final_test,list_final_pred))
-    #acc_2.append(np.mean(precision_recall_fscore_support(list_final_test,list_final_pred)[1]))
     sam_2.append(len(list_final_test)*100/len(y_test))
 fig = plt.figure()
 ax1 = fig.add_axes([0, 0, 1, 1])
 ax2 = fig.add_axes()
 ax2 = ax1.twinx()
 l1 = ax1.plot(l_temp,np.array(acc_2),c='r',linestyle='-',label='Overall Accuracy')
-#l2 = ax1.plot(l_temp,np.array(acc_1)*100,c='r',label='Overall Accuracy method 1')
 ax1.tick_params(axis='y', labelcolor='r')
 l2 = ax2.plot(l_temp,sam_2,c='b',linestyle = '-',label = 'No. of samples' )
-#l4 = ax2.plot(l_temp,sam_1,c='g',label='No. of samples method 1')
 ax2.tick_params(axis='y', labelcolor='b')
 leg = l2+l1
 ax1.set_ylabel('Overall Accuracy (%)', color='r',fontsize=15)
 ax2.set_ylabel('% samples retained', color='b',fontsize=15)
 ax1.set_xlabel('Filtering cut-off (Times train uncertainty)',fontsize=15)
 labs = [l.get_label() for l in leg]
-#ax1.legend()
 ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
-#ax1.legend(bbox_to_anchor=(1,0.65))
-#ax2.legend(bbox_to_anchor=(0.99,0.80))
-#ax2.grid(None)
-#ax2.set_yticks(np.linspace(ax2.get_yticks()[0],ax2.get_yticks()[-1],len(ax1.get_yticks())))
 ax1.grid()
 fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
-#fig.savefig('Desktop/paper_figures/'+str('times_train_uncertainty_plot')+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 
@@ -859,17 +801,14 @@ df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_squamous = df_sample_type[df_sample_type['histological_type'] == 'Esophagus Squamous Cell Carcinoma']
 df_sample_type_adeno = df_sample_type[df_sample_type['histological_type'] == 'Esophagus Adenocarcinoma, NOS']
-#df_sample_type_oligoastrocytoma = df_sample_type[df_sample_type['histological_type'] == 'Oligoastrocytoma']
 df_sample_type_squamous['histological_type'] = 0
 df_sample_type_adeno['histological_type'] = 1
-#df_sample_type_oligoastrocytoma['histological_type'] = 2
 df_phenotype_prediction = pd.concat([df_sample_type_squamous,df_sample_type_adeno])
 df_sample_type_merged = df_samples.merge(df_phenotype_prediction,on='sampleID',how='inner')
 df_pca2_with_samples = df_samples.merge(df_pca2,right_index=True,left_index=True)
 df_pca2_common = df_sample_type_merged.merge(df_pca2_with_samples,on='sampleID',how='inner')
 df_pca2_common.dropna(inplace=True)
 df_pca2_common.drop('sampleID',axis=1,inplace=True)
-#df_pca2_common.drop('label',axis=1,inplace=True)
 df_pca2_common['label'] = list(df_pca2_common['histological_type'])
 df_pca2_common.drop('histological_type',axis=1,inplace=True)
 
@@ -960,48 +899,6 @@ fig.savefig('Desktop/paper_revision/'+str('method_comparison_')+analysis_type+'.
 plt.show()
 
 
-# ep_test = com_ep_un(logits)
-# acc_2 = []
-# l_temp = np.arange(0.1,20.1,0.1)
-# sam_2 = []
-# for j in l_temp:
-#     list_final_pred = []
-#     list_final_test = []
-#     for i in range(len(arr_pred_test)):
-#         if (ep_test[i]*1e9 <= j* dict_mean_ep[arr_pred_test[i]]):
-#             list_final_test.append(np.array(y_test)[i])
-#             list_final_pred.append(arr_pred_test[i])
-#     acc_2.append(accuracy_score(list_final_test,list_final_pred))
-#     #acc_2.append(np.mean(precision_recall_fscore_support(list_final_test,list_final_pred)[1]))
-#     sam_2.append(len(list_final_test)*100/len(y_test))
-# fig = plt.figure()
-# ax1 = fig.add_axes([0, 0, 1, 1])
-# ax2 = fig.add_axes()
-# ax2 = ax1.twinx()
-# l1 = ax1.plot(l_temp,np.array(acc_2),c='r',linestyle='-',label='Overall Accuracy')
-# #l2 = ax1.plot(l_temp,np.array(acc_1)*100,c='r',label='Overall Accuracy method 1')
-# ax1.tick_params(axis='y', labelcolor='r')
-# l2 = ax2.plot(l_temp,sam_2,c='b',linestyle = '-',label = 'No. of samples' )
-# #l4 = ax2.plot(l_temp,sam_1,c='g',label='No. of samples method 1')
-# ax2.tick_params(axis='y', labelcolor='b')
-# leg = l2+l1
-# ax1.set_ylabel('Overall Accuracy (%)', color='r',fontsize=15)
-# ax2.set_ylabel('% samples retained', color='b',fontsize=15)
-# ax1.set_xlabel('Filtering cut-off (Times train uncertainty)',fontsize=15)
-# labs = [l.get_label() for l in leg]
-# #ax1.legend()
-# ax1.legend(leg, labs, loc=(0.6,0.77))
-# ax2.set_yticks(np.arange(0,110,10))
-# ax1.set_xticks(np.arange(0,21))
-# #ax1.legend(bbox_to_anchor=(1,0.65))
-# #ax2.legend(bbox_to_anchor=(0.99,0.80))
-# #ax2.grid(None)
-# #ax2.set_yticks(np.linspace(ax2.get_yticks()[0],ax2.get_yticks()[-1],len(ax1.get_yticks())))
-# ax1.grid()
-# fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
-# #fig.savefig('Desktop/paper_figures/'+str('times_train_uncertainty_plot')+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
-# plt.show()
-
 # # Thyroid Carcinoma
 
 # In[95]:
@@ -1035,17 +932,14 @@ df_temp = df_samples.merge(df_temp,on='sampleID',how='inner')
 df_sample_type = df_temp[['sampleID','histological_type']]
 df_sample_type_papillary = df_sample_type[df_sample_type['histological_type'] == 'Thyroid Papillary Carcinoma - Classical/usual']
 df_sample_type_follicular = df_sample_type[df_sample_type['histological_type'] == 'Thyroid Papillary Carcinoma - Follicular (>= 99% follicular patterned)']
-#df_sample_type_oligoastrocytoma = df_sample_type[df_sample_type['histological_type'] == 'Oligoastrocytoma']
 df_sample_type_papillary['histological_type'] = 0
 df_sample_type_follicular['histological_type'] = 1
-#df_sample_type_oligoastrocytoma['histological_type'] = 2
 df_phenotype_prediction = pd.concat([df_sample_type_papillary,df_sample_type_follicular])
 df_sample_type_merged = df_samples.merge(df_phenotype_prediction,on='sampleID',how='inner')
 df_pca2_with_samples = df_samples.merge(df_pca2,right_index=True,left_index=True)
 df_pca2_common = df_sample_type_merged.merge(df_pca2_with_samples,on='sampleID',how='inner')
 df_pca2_common.dropna(inplace=True)
 df_pca2_common.drop('sampleID',axis=1,inplace=True)
-#df_pca2_common.drop('label',axis=1,inplace=True)
 df_pca2_common['label'] = list(df_pca2_common['histological_type'])
 df_pca2_common.drop('histological_type',axis=1,inplace=True)
 
@@ -1191,7 +1085,6 @@ for j in l_temp:
             list_final_test.append(np.array(y_test)[i])
             list_final_pred.append(arr_pred_test[i])
     acc_2.append(accuracy_score(list_final_test,list_final_pred))
-    #acc_2.append(np.mean(precision_recall_fscore_support(list_final_test,list_final_pred)[1]))
     sam_2.append(len(list_final_test)*100/len(y_test))
 fig = plt.figure()
 ax1 = fig.add_axes([0, 0, 1, 1])
@@ -1208,17 +1101,11 @@ ax1.set_ylabel('Overall Accuracy (%)', color='r',fontsize=15)
 ax2.set_ylabel('% samples retained', color='b',fontsize=15)
 ax1.set_xlabel('Filtering cut-off (Times train uncertainty)',fontsize=15)
 labs = [l.get_label() for l in leg]
-#ax1.legend()
 ax1.legend(leg, labs, loc=(0.6,0.77))
 ax2.set_yticks(np.arange(0,110,10))
 ax1.set_xticks(np.arange(0,21))
-#ax1.legend(bbox_to_anchor=(1,0.65))
-#ax2.legend(bbox_to_anchor=(0.99,0.80))
-#ax2.grid(None)
-#ax2.set_yticks(np.linspace(ax2.get_yticks()[0],ax2.get_yticks()[-1],len(ax1.get_yticks())))
 ax1.grid()
 fig.savefig('Desktop/paper_revision/'+str('filtering_cutoff_')+analysis_type+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
-#fig.savefig('Desktop/paper_figures/'+str('times_train_uncertainty_plot')+'.pdf', format='pdf', dpi=1200,bbox_inches='tight')
 plt.show()
 
 

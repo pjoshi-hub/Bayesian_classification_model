@@ -301,40 +301,6 @@ def uncertainty_correction(test_logits):
     return adjusted_logits_complete
 
 
-# In[ ]:
-
-
-def uncertainty(test_logits):
-    
-    adjusted_logits_complete = []
-    
-    mean_test_logits = sum(test_logits)/len(test_logits)
-    func_mean_test_logits = np.log(np.array(mean_test_logits)/(1-np.array(mean_test_logits)))
-    
-    
-    
-    for index in range(3):
-    
-        
-        epistemic_test = np.sqrt(com_ep_un(test_logits,index))
-        epistemic_test_norm = epistemic_test/np.max(epistemic_test)
-
-        X = epistemic_test_norm
-        
-        Y = list(func_mean_test_logits[index,:])
-        X = sm.add_constant(X)
-        model = sm.OLS(Y, X).fit()
-        
-        adj_logits = func_mean_test_logits[index,:]-model.params[1]*epistemic_test_norm
-        func_inv_adj_logits = np.exp(adj_logits)/(1+np.exp(adj_logits))
-        
-        adjusted_logits_complete.append(func_inv_adj_logits)
-
-    return adjusted_logits_complete,model.params
-
-
-
-
 
 def uncertainty_analysis(logits_train,y_train,arr_pred_train,logits,y_test,arr_pred_test,scal_fac,analysis_type):
     [al_train,mu_train_ac,mu_train_nac] = uncertainty_calculation(logits_train,y_train,arr_pred_train,'Aleatoric','Train',_,analysis_type)

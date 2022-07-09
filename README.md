@@ -9,6 +9,8 @@
 
 **Implementation**
 
-The datasets to reproduce the figures shown above can be found at : \\
+The datasets to reproduce the figures shown above can be found at : 
+
+
 Using the datasets, the .ipynb files can be run step by step to generate the results and the figures. The names of the files in the link mentioned above are the same as in .ipynb files.
 

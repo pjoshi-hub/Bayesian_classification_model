@@ -6,11 +6,6 @@
 
 
 
-# <sub><sup>1: Gene set selection</sup></sub>
-
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/Feature_selection_pca2.JPG)
-
-
 
 **Uncertainty correction can be used to improve the performance of prediction models**
 

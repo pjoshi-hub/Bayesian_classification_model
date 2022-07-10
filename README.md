@@ -16,10 +16,9 @@
 
 **3: Cancer subtype classification using uncertaity correction (EpICC)**
 
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/LGG_subtypes.JPG)
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/BRCA_subtypes.JPG)
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/ESCA_subtypes.JPG)
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/THCA_subtypes.JPG)
+![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/LGG_subtypes.JPG) ![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/BRCA_subtypes.JPG)
+![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/ESCA_subtypes.JPG) ![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/THCA_subtypes.JPG)
+
 
 **Uncertainty correction can be used to improve the performance of prediction models**
 

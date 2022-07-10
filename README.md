@@ -17,7 +17,7 @@
 
 # <sub><sup>Implementation</sup><sub>
 
-**Codes**
+**Codes and Implementation**
  - BNN.py:  Bayesian neural network
  - uncertainty.py : code to calculate and correct uncertainty
  - DNN_classification.py: code to train DNN and test
@@ -26,11 +26,9 @@
  
  **Ipython notebooks**
 - Feature_selection_and_PCA_plots.ipynb: step by step execution to select gene set
-- Cancer_classification.ipynb: step by step execution to 
-  
-  
-The datasets to reproduce the figures shown above can be found at : 
-
-
-Using the datasets, the .ipynb files can be run step by step to generate the results and the figures. The names of the files in the link mentioned above are the same as in .ipynb files.
-
+- Cancer_classification.ipynb: step by step execution to reproduce results for cancer classification reported in the study
+- Cancer_subtype_classifcation: step by step execution to reprodce results for cancer subtype classifcation reported in the study
+ 
+ The datasets can be found at: 
+ 
+ To successfully execute the code, the dataset sould be loaded into the current working directory, and the code blocks should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.

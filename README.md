@@ -23,7 +23,7 @@
 **Uncertainty correction can be used to improve the performance of prediction models**
 
 
-**Implementation**
+# <sub><sup>Implementation</sup><sub>
 
 The datasets to reproduce the figures shown above can be found at : 
 

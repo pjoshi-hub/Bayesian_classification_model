@@ -26,4 +26,4 @@
  
  The datasets can be found at: 
  
- To successfully execute the code, the dataset sould be loaded into the current working directory, and the code blocks should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.
+ To successfully execute the code, the datasets sould be loaded into the current working directory, and the code blocks should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.

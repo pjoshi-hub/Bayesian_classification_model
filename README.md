@@ -10,14 +10,6 @@
 
 ![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/Feature_selection_pca2.JPG)
 
-**2: Cancer classification using uncertainty correction (EpICC)**
-
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/Cancer_classification.JPG)
-
-**3: Cancer subtype classification using uncertaity correction (EpICC)**
-
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/LGG_subtypes.JPG) ![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/BRCA_subtypes.JPG)
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/ESCA_subtypes.JPG) ![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/THCA_subtypes.JPG)
 
 
 **Uncertainty correction can be used to improve the performance of prediction models**
@@ -30,6 +22,11 @@
  - uncertainty.py : code to calculate and correct uncertainty
  - DNN_classification.py: code to train DNN and test
  - Feature_selection_and_PCA_plots.py: code to select gene set from pca
+ - Implementation.py: code to implement and generate analysis and results
+ 
+ **Ipython notebooks**
+- Feature_selection_and_PCA_plots.ipynb: step by step execution to select gene set
+- Cancer_classification.ipynb: step by step execution to 
   
   
 The datasets to reproduce the figures shown above can be found at : 

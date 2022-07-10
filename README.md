@@ -28,6 +28,6 @@
  
  To successfully execute the code, the datasets sould be loaded into the current working directory, and the code blocks should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.
  
- To generate the final results, the .ipynb files should be run. 
+ To generate the final results, the .ipynb files should be run after loading the datasets mentioned in the link into the present working directory. 
  
- To generate the complete results of the study, the Implementation.py file should be run.
+ To generate the analysis figures in the study, the Implementation.py file should be run after loading the datasets mentioned in the link into the present working directory. .

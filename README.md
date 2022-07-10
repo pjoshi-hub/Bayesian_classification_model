@@ -26,10 +26,10 @@
 # <sub><sup>Implementation</sup><sub>
 
 **Codes**
-  *BNN.py:  Bayesian neural network
-  *uncertainty.py : code to calculate and correct uncertainty
-  *DNN_classification.py: code to train DNN and test
-  *Feature_selection_and_PCA_plots.py: code to select gene set from pca
+ - BNN.py:  Bayesian neural network
+ - uncertainty.py : code to calculate and correct uncertainty
+ - DNN_classification.py: code to train DNN and test
+ - Feature_selection_and_PCA_plots.py: code to select gene set from pca
   
   
 The datasets to reproduce the figures shown above can be found at : 

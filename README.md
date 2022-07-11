@@ -13,7 +13,6 @@
 # <sub><sup>Implementation</sup><sub>
 
 **.py files**
- These files contain the python codes to obtain corrected outputs
  - BNN.py:  Bayesian neural network
  - uncertainty.py : code to calculate and correct uncertainty
  - DNN_classification.py: code to train DNN and test

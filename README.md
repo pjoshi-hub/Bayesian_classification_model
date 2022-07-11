@@ -18,9 +18,9 @@
  Implementation.py contains the coded to generate results and the individual .py files represent the different code blocks used in Implementation.py
  
  **.ipynb files**
-- Feature_selection_and_PCA_plots.ipynb: step by step execution to select gene set
-- Cancer_classification.ipynb: step by step execution to reproduce results for cancer classification reported in the study
-- Cancer_subtype_classifcation: step by step execution to reprodce results for cancer subtype classifcation reported in the study
+- Feature_selection_and_PCA_plots.ipynb: step by step Jupyter notebook execution to select gene set
+- Cancer_classification.ipynb: step by step Jupyter notebook execution to reproduce results for cancer classification reported in the study
+- Cancer_subtype_classifcation: step by step Jupyter notebook execution to reprodce results for cancer subtype classifcation reported in the study
  
  The datasets can be found at: https://drive.google.com/drive/folders/1afzlMAiHy3LWFoA-M5N4OUDMaMa70o3S?usp=sharing
  
@@ -29,7 +29,7 @@
  2. The code blocks in the .ipynb files should be executed. The naming convention of the datasets in the link is the same as that mentioned in the codes.
  3. To generate additional analysis figures in the study, the folder "codes" should be cloned to the default directory of the jupyter notebook and the following line should be run:
 ```
-%run Implementation.py
+%run implementation.py
 ```
  
  

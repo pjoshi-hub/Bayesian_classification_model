@@ -10,12 +10,12 @@
 
 **.py files**
  - BNN.py:  Bayesian Neural Network
- - Uncertainty.py : code to calculate and correct uncertainty
+ - uncertainty.py : code to calculate and correct uncertainty
  - DNN_classification.py: Deep Neural Network based on point estimates
  - Feature_selection_and_PCA_plots.py: code to select gene set from pca
- - Implementation.py: code to implement and generate results
+ - implementation.py: code to implement and generate results
  
- Implementation.py contains the coded to generate results and the individual .py files represent the different code blocks used in Implementation.py
+ implementation.py contains the coded to generate results and the individual .py files represent the different code blocks used in implementation.py
  
  **.ipynb files**
 - Feature_selection_and_PCA_plots.ipynb: step by step Jupyter notebook execution to select gene set

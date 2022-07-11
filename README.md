@@ -24,7 +24,7 @@
 - Cancer_classification.ipynb: step by step execution to reproduce results for cancer classification reported in the study
 - Cancer_subtype_classifcation: step by step execution to reprodce results for cancer subtype classifcation reported in the study
  
- The datasets can be found at: 
+ The datasets can be found at: https://drive.google.com/drive/folders/1afzlMAiHy3LWFoA-M5N4OUDMaMa70o3S?usp=sharing
  
  To successfully execute the code, the datasets sould be loaded into the current working directory, and the code blocks should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.
  

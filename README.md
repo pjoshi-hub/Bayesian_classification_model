@@ -6,7 +6,7 @@
 
 **Epistemic uncertaity plot for classification 31 different types of cancer using Bayesian Neural Network**
 
-![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/uncertainty_workflow.jpg)
+![alt text](https://github.com/pjoshi-hub/Bayesian_classification_model/blob/main/Figures/Uncertainty_plot.JPG)
 
 
 
@@ -14,10 +14,12 @@
 
 **.py files**
  - BNN.py:  Bayesian neural network
- - uncertainty.py : code to calculate and correct uncertainty
+ - Uncertainty.py : code to calculate and correct uncertainty
  - DNN_classification.py: code to train DNN and test
  - Feature_selection_and_PCA_plots.py: code to select gene set from pca
  - Implementation.py: code to implement and generate results
+ 
+ Implementation.py contains the coded to generate results and the individual .py files represent the different code blocks used in Implementation.py
  
  **.ipynb files**
 - Feature_selection_and_PCA_plots.ipynb: step by step execution to select gene set

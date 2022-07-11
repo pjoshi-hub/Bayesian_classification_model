@@ -28,7 +28,7 @@
  
  To successfully execute the code:
  1. The datasets sould be loaded into the current working directory
- 2. The code blocks should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.
- 3. To generate the final results, the .ipynb files should be run after loading the datasets mentioned in the link into the present working directory. 
+ 2. The code blocks in the .ipynb files should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.
+ 3. To generate analysis figures in the study, the Implementation.py file should be run after loading the datasets mentioned in the link into the present working directory. .
+
  
- To generate the analysis figures in the study, the Implementation.py file should be run after loading the datasets mentioned in the link into the present working directory. .

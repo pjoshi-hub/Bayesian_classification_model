@@ -27,8 +27,11 @@
  The datasets can be found at: https://drive.google.com/drive/folders/1afzlMAiHy3LWFoA-M5N4OUDMaMa70o3S?usp=sharing
  
  To successfully execute the code:
- 1. The datasets sould be loaded into the current working directory
+ 1. The datasets sould be loaded into the current working directory This is a prerequisite to run all the codes
  2. The code blocks in the .ipynb files should be executed. The naming convention of the datasets in the link is the same that is mentioned in the link.
- 3. To generate analysis figures in the study, the Implementation.py file should be run after loading the datasets mentioned in the link into the present working directory. .
-
+ 3. To generate additional analysis figures in the study, the folder codes should be clones to the default directory of the jupyter notebook and the following lune should be run:
+'''
+%run Implementation.py
+'''
+ 
  

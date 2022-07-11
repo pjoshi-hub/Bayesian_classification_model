@@ -13,9 +13,9 @@
 # <sub><sup>Implementation</sup><sub>
 
 **.py files**
- - BNN.py:  Bayesian neural network
+ - BNN.py:  Bayesian Neural Network
  - Uncertainty.py : code to calculate and correct uncertainty
- - DNN_classification.py: code to train DNN and test
+ - DNN_classification.py: Deep Neural Network based on point estimates
  - Feature_selection_and_PCA_plots.py: code to select gene set from pca
  - Implementation.py: code to implement and generate results
  
